@@ -1,0 +1,102 @@
+<!doctype html>
+<!-- Leonida Trophy Guide — rebuilt 2026-11-20 under a live make.fun recording.
+     Offline static guide + tracker for all 55 GTA VI PS5 trophies. No network,
+     no build step: every file this page loads lives under app/. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Trophy Guide — GTA VI (PS5)</title>
+<meta name="description" content="Offline guide and tracker for all 55 Grand Theft Auto VI trophies on PlayStation 5: official names, descriptions and grades, a platinum roadmap, missable flags, and a checklist that saves in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff2e88'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="kicker">Grand Theft Auto VI &middot; PlayStation 5 &middot; Unofficial fan guide</p>
+    <h1>Leonida Trophy Guide</h1>
+    <p class="tagline">All 55 trophies, with guides in our own words and sources cited — plus a tracker that remembers what you have earned.</p>
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-text" id="progress-text">Loading…</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Trophies</dt><dd>55</dd></div>
+      <div><dt>Platinum</dt><dd>1</dd></div>
+      <div><dt>Gold</dt><dd>2</dd></div>
+      <div><dt>Silver</dt><dd>6</dd></div>
+      <div><dt>Bronze</dt><dd>46</dd></div>
+      <div><dt>Hidden</dt><dd>28</dd></div>
+      <div><dt>Online</dt><dd>0</dd></div>
+      <div><dt>Time to platinum</dt><dd>~200 h</dd></div>
+    </dl>
+  </div>
+</header>
+
+<main>
+  <noscript><p class="noscript-note">This guide needs JavaScript: the trophy list, roadmap and tracker are rendered by the script in app.js (which runs entirely offline, from files under app/).</p></noscript>
+  <section class="roadmap" id="roadmap" aria-label="Roadmap to the platinum">
+    <h2>Roadmap to the platinum</h2>
+    <p class="roadmap-intro">One playthrough is enough. There is no mission replay and no New Game+, so keep a manual save at the start of each chapter (15 manual slots). Cheats disable trophies and saving — keep them off for the whole run.</p>
+    <ol class="roadmap-steps" id="roadmap-steps"></ol>
+    <aside class="missable-callout" id="missable-callout">
+      <h3>⚠ The one trophy that can pass you by</h3>
+      <p><strong>Positive Mental Attitude</strong> (meditate at every spot) is the only trophy reported as potentially missable. In Chapter 1, after the mission <em>Down to Earth</em>, talk to Lucia in the kitchen in the morning — she says she is going to meditate and walks to the balcony. Follow her and choose <em>Accept</em>. That spot disappears after Chapter 1, and it is still unconfirmed whether it counts toward the trophy, so do it to be safe. Every other trophy can be earned in free-roam after the story.</p>
+      <p class="callout-source">Source: <a href="https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/" target="_blank" rel="noopener">PowerPyx — GTA 6 Trophy Guide &amp; Roadmap</a></p>
+    </aside>
+  </section>
+
+  <section class="controls" aria-label="Tracker controls">
+    <div class="controls-row">
+      <label class="search-label">Search <input id="search" type="search" placeholder="Trophy, mission or keyword…" autocomplete="off"></label>
+      <label>Grade
+        <select id="grade-filter">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+      </label>
+      <label>Progress
+        <select id="earned-filter">
+          <option value="all">All trophies</option>
+          <option value="todo">Not earned yet</option>
+          <option value="earned">Earned</option>
+        </select>
+      </label>
+      <label class="spoiler-toggle"><input id="spoiler-toggle" type="checkbox" checked> Hide story spoilers</label>
+    </div>
+    <div class="controls-row">
+      <div class="kind-chips" id="kind-chips" role="group" aria-label="Filter by kind"></div>
+      <div class="data-buttons">
+        <button id="export-btn" type="button">Export progress</button>
+        <label class="import-btn">Import progress <input id="import-file" type="file" accept="application/json,.json"></label>
+        <button id="reset-btn" type="button">Reset</button>
+      </div>
+    </div>
+    <p class="controls-note" id="controls-note"></p>
+  </section>
+
+  <section class="list" aria-label="Trophy checklist">
+    <p class="list-count" id="list-count"></p>
+    <div id="trophy-list"></div>
+    <p class="empty-state" id="empty-state" hidden>No trophies match these filters.</p>
+    <p class="online-note" id="online-note" hidden>There are no online trophies in GTA VI — every trophy is earned in single-player. That is why this filter is empty. <span class="note-source">Source: PowerPyx trophy guide.</span></p>
+  </section>
+
+  <section class="sources" aria-label="Sources">
+    <h2>Sources &amp; notes</h2>
+    <ul id="source-list"></ul>
+    <p>Trophy names, descriptions and grades are shown as PlayStation publishes them, as listed by Exophase and PSNProfiles and cross-checked in November 2026. Every guide on this page is written in our own words for this guide; sources are named beside each trophy so you can check the facts. Three trophies (In The Beginning…, Bad Luck, I Guess and Ten Pin) had no confirmed unlock method at launch — their entries say so plainly instead of guessing. This is an unofficial fan guide, not affiliated with Rockstar Games, Sony or PlayStation. No Rockstar logo, artwork or game screenshot is used anywhere on this page.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Leonida Trophy Guide — an offline, static guide. Your checklist is stored only in this browser (localStorage); export it to keep a backup.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
