@@ -1,5 +1,3 @@
-<!-- Rebuilt 2026-11-20 under a live make.fun recording (strict-transcripts resubmit):
-     reviewed every file, fixed real issues, re-verified all 55 trophies. -->
 # Leonida Trophy Guide — GTA VI (PS5)
 
 [![make.fun · gta6-trophy-guide-01](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
@@ -24,16 +22,17 @@ Then open http://localhost:8080. No build step, no network: `app/` is plain stat
 - `app/data/trophies.json` — all 55 trophies (official name, description, grade, kind, missable flag, roadmap stage, guide, sources).
 - `main.ts` — hands the entry in: copies `app/` and `screenshots/` to `/output` and writes `/output/dossier.json`.
 - `screenshots/` — 4 screenshots of the guide running in a browser (first by name is the cover).
+- `shots.json` — the screenshot plan: viewport, demo state and scroll position per shot.
 
 ## Notes
 
 - The one potentially missable trophy is **Positive Mental Attitude**: do the Chapter 1 balcony meditation with Lucia before Chapter 1 ends.
-- Three trophies had no confirmed unlock method at launch (In The Beginning…, Bad Luck, I Guess, Ten Pin) — the guide says so plainly instead of guessing.
+- One trophy had no confirmed unlock method at launch (**Bad Luck, I Guess**) — the guide says so plainly instead of guessing. Two more (In The Beginning…, Ten Pin) were only pinned down by the guides after launch, and the guide cites PowerPyx for both.
 - Unofficial fan guide, not affiliated with Rockstar Games, Sony or PlayStation. No Rockstar logo, artwork or game screenshots are used.
 
 ## Rebuild (2026-11-20)
 
-Rebuilt under a live make.fun recording for the strict-transcripts resubmission. Every file was reviewed and rewritten in that session: the trophy data was re-verified (55 trophies, grades 1/2/6/46, 28 hidden, no blank guides), three internal inconsistencies in the guides were fixed (the final-mission chapter, Andy's quest count), the tracker now keeps keyboard focus when a trophy is checked, and the local server handles HEAD requests and stream errors. Nothing about the guide's content or look changed beyond those fixes.
+Rebuilt from scratch under a live make.fun recording for the strict-transcripts resubmission. Every file was written fresh in that session: the trophy data was re-typed from the official list and re-verified against Exophase, PSNProfiles, PowerPyx, SixShore and GTA-Zone (55 trophies, grades 1/2/6/46, 28 hidden, no blank guides), the guides were rewritten in our own words with sources cited per trophy, and the tracker, server and hand-in program were reimplemented. Nothing about the guide's content or look changed beyond those fixes and the two post-launch confirmations above.
 
 ---
 

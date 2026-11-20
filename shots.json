@@ -1,1 +1,43 @@
-[{"file":"1-cover.jpg","note":"cover: header, progress bar, trophy facts and the top of the checklist","path":"/","setup":"spoilers-off","viewport":{"height":800,"width":1280}},{"file":"2-roadmap.jpg","note":"roadmap + missable callout at top","path":"/","scroll":0,"setup":"spoilers-off","viewport":{"height":800,"width":1280}},{"file":"3-guide-open.jpg","note":"checklist scrolled down: a trophy card with its guide and sources","path":"/","scroll":2400,"setup":"spoilers-off","viewport":{"height":800,"width":1280}},{"file":"4-spoilers.jpg","note":"spoiler protection on: story trophies hidden until earned","path":"/","setup":"spoilers-on","viewport":{"height":800,"width":1280}}]
+{
+  "viewport": { "width": 1280, "height": 800 },
+  "note": "Screenshot plan for the guide. Each shot is a real render of app/ in desktop Chrome at 1280x800. The demo state lists the trophies ticked before the shot (7 earned: 1 platinum, 1 gold, 1 silver, 4 bronze) and whether spoiler protection is on. The first shot by name is the cover.",
+  "demoEarned": [
+    "Vice Got a Price!",
+    "You Gotta Know When to Get Off",
+    "Cunning Stunts",
+    "Paradise Lost",
+    "T**s Ass Drug Money",
+    "Vice City, Baby!",
+    "Top Of The World, Ma"
+  ],
+  "shots": [
+    {
+      "file": "1-cover.jpg",
+      "scroll": "top",
+      "checks": "demoEarned",
+      "spoiler": false,
+      "note": "Cover: hero, progress bar at 7 of 55, stats row, and the roadmap heading."
+    },
+    {
+      "file": "2-roadmap.jpg",
+      "scroll": "#roadmap",
+      "checks": "demoEarned",
+      "spoiler": false,
+      "note": "Roadmap: the three steps, the missable-trophy warning, and the filter toolbar."
+    },
+    {
+      "file": "3-guide-open.jpg",
+      "scroll": "#trophyList",
+      "checks": "demoEarned",
+      "spoiler": false,
+      "note": "Checklist: earned trophies with their guides and sources open beside them."
+    },
+    {
+      "file": "4-spoilers.jpg",
+      "scroll": "#trophyList",
+      "checks": [],
+      "spoiler": true,
+      "note": "Spoiler protection on: story trophies stay hidden until earned, the platinum still shows."
+    }
+  ]
+}
