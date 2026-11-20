@@ -1,83 +1,64 @@
+// A tiny static server for app/ (Node 22, standard library only), so the
+// guide can be run locally without a build step: `node serve.ts` serves app/
+// on http://localhost:8080, or `--port <n>` for another port. It sends the
+// MIME types a browser needs, refuses any path outside app/, and otherwise
+// does nothing clever — a development convenience, not a web server for the
+// internet.
 import { createReadStream, statSync } from 'node:fs';
-import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
+import { createServer } from 'node:http';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-/* Leonida Trophy Guide — local static server.
-   Serves app/ at its root on http://localhost:8080 so the guide can be
-   tried in a browser exactly as the grader serves it. No build step,
-   no network: only files under app/ are ever served. */
+const root = resolve(fileURLToPath(new URL('./app', import.meta.url)));
+const args = process.argv.slice(2);
+const portIndex = args.indexOf('--port');
+const requested = portIndex === -1 ? 8080 : Number(args[portIndex + 1]);
+const port = Number.isInteger(requested) && requested > 0 && requested < 65536 ? requested : 8080;
 
-const repoRoot = fileURLToPath(new URL('.', import.meta.url));
-const appRoot = resolve(join(repoRoot, 'app'));
-const port = Number(process.env.PORT || 8080);
-
-const CONTENT_TYPES: Record<string, string> = {
+const MIME = {
   '.html': 'text/html; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
-  '.svg': 'image/svg+xml',
-  '.ico': 'image/x-icon'
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon',
 };
 
-function safePath(urlPath: string): string | null {
-  const decoded = decodeURIComponent(urlPath.split('?')[0].split('#')[0]);
-  const joined = resolve(join(appRoot, normalize('/' + decoded).replace(/^\/+/, '')));
-  if (joined !== appRoot && !joined.startsWith(appRoot + sep)) return null;
-  return joined;
-}
-
-function sendError(response: ServerResponse, status: number, message: string): void {
-  if (!response.headersSent) {
-    response.writeHead(status, { 'content-type': 'text/plain; charset=utf-8' });
-  }
-  response.end(message + '\n');
-}
-
-const server = createServer((request: IncomingMessage, response: ServerResponse) => {
-  if (request.method !== 'GET' && request.method !== 'HEAD') {
-    sendError(response, 405, 'Method not allowed');
-    return;
-  }
-  const filePath = safePath(request.url || '/');
-  if (filePath === null) {
-    sendError(response, 403, 'Forbidden');
-    return;
-  }
-  let target = filePath;
+createServer((request, response) => {
+  const url = new URL(request.url ?? '/', 'http://localhost');
+  let pathname;
   try {
-    const stat = statSync(target);
-    if (stat.isDirectory()) target = join(target, 'index.html');
+    pathname = decodeURIComponent(url.pathname);
   } catch {
-    sendError(response, 404, 'Not found');
+    response.writeHead(400).end('bad request');
     return;
   }
-  let size: number;
+  if (pathname.endsWith('/')) pathname += 'index.html';
+  const file = resolve(join(root, normalize(pathname)));
+  if (file !== root && !file.startsWith(root + sep)) {
+    response.writeHead(403).end('forbidden');
+    return;
+  }
+  let size;
   try {
-    size = statSync(target).size;
+    const stats = statSync(file);
+    if (!stats.isFile()) throw new Error('not a file');
+    size = stats.size;
   } catch {
-    sendError(response, 404, 'Not found');
+    response.writeHead(404).end('not found');
     return;
   }
-  const type = CONTENT_TYPES[extname(target).toLowerCase()] || 'application/octet-stream';
-  response.writeHead(200, { 'content-type': type, 'content-length': size });
-  if (request.method === 'HEAD') {
-    response.end();
-    return;
-  }
-  const stream = createReadStream(target);
-  stream.on('error', () => {
-    if (!response.headersSent) sendError(response, 500, 'Read failed');
-    else response.destroy();
+  response.writeHead(200, {
+    'content-type': MIME[extname(file).toLowerCase()] ?? 'application/octet-stream',
+    'content-length': size,
+    'cache-control': 'no-store',
   });
-  stream.pipe(response);
-});
-
-server.listen(port, () => {
-  console.log('Leonida Trophy Guide at http://localhost:' + port + '/');
+  createReadStream(file).pipe(response);
+}).listen(port, '127.0.0.1', () => {
+  console.log(`Leonida Trophy Guide is on http://localhost:${port}`);
 });
